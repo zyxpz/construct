@@ -19,6 +19,9 @@ config.commands.forEach(opt => {
 	let aCmd = program
 		.command(opt.name, '', { noHelp: opt.noHelp })
 		.description(opt.description);
+	(opt.options || []).forEach(o => {
+		aCmd.option(o.name, o.description);
+	});
 	aCmd.action(() => {
 		require(`../lib/${Array.prototype.slice.call(process.argv, 2)[0]}`)(Array.prototype.slice.call(process.argv, 2).slice(1));
 	});

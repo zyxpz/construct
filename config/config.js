@@ -44,6 +44,10 @@ module.exports = {
 				{
 					name: '-t, --text <s>',
 					description: '测试文案'
+				},
+				{
+					name: '-tx <s>',
+					description: '测试链式调用'
 				}
 			]
 		}
