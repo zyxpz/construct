@@ -1,0 +1,39 @@
+{
+  "name": "construct",
+  "version": "1.0.0",
+  "description": "webpack4前端框架快速构建",
+  "main": "index.js",
+  "bin": {
+    "construct": "./bin/cli.js"
+  },
+  "scripts": {
+    "lint": "esw ./bin/*.* ./config/*.* ./lib/**/*.js --fix --watch"
+  },
+  "keywords": [
+    "construct"
+  ],
+  "author": "mido",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.15.1",
+    "inquirer": "^6.0.0"
+  },
+  "devDependencies": {
+    "@babel/traverse": "^7.0.0-beta.49",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-markdown": "^1.0.0-beta.6",
+    "eslint-watch": "^3.1.5"
+  },
+  "engines": {
+    "npm": ">=3.10.2",
+    "node": ">=4.3.2"
+  },
+  "ci": {
+    "versions": [
+      "4",
+      "6"
+    ]
+  }
+}
