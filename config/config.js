@@ -1,8 +1,8 @@
 const path = require('path');
 
 const types = {
-	'offline': '离线包',
-	'online': '在线包'
+	'reactPackage': 'react包',
+	'generalPackage': '普通包'
 };
 
 /**
@@ -23,13 +23,45 @@ function getTypes() {
  */
 function getQuestions() {
 	return [
+		// {
+		// 	type: 'list',
+		// 	name: 'type',
+		// 	message: '类型',
+		// 	choices: getTypes(),
+		// 	default() {
+		// 		return 'online';
+		// 	}
+		// },
 		{
-			type: 'list',
-			name: 'type',
-			message: '类型',
-			choices: getTypes(),
+			type: 'input',
+			name: 'name',
+			message: '包名',
 			default() {
-				return 'online';
+				return path.basename(process.cwd());
+			}
+		},
+		{
+			type: 'input',
+			name: 'version',
+			message: '版本',
+			default() {
+				return '1.0.0';
+			}
+		},
+		{
+			type: 'input',
+			name: 'author',
+			message: '开发人员',
+			default() {
+				return '未命名';
+			}
+		},
+		{
+			type: 'input',
+			name: 'title',
+			message: '标题:',
+			default() {
+				return '未命名';
 			}
 		}
 	];
@@ -42,12 +74,12 @@ module.exports = {
 			description: '初始化',
 			options: [
 				{
-					name: '-t, --text <s>',
-					description: '测试文案'
+					name: '-p, --port <d>',
+					description: '端口'
 				},
 				{
-					name: '-tx <s>',
-					description: '测试链式调用'
+					name: '-s <s>',
+					description: '创建路径'
 				}
 			]
 		}

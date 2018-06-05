@@ -1,0 +1,98 @@
+{
+	"parserOptions":
+	{
+		"ecmaVersion": 6,
+		"sourceType": "module",
+		"ecmaFeatures":
+		{
+			"jsx": true
+		}
+	},
+	"env":
+	{
+		"browser": true,
+		"node": true,
+		"es6": true,
+		"mocha": true
+	},
+	"plugins": [
+		"markdown",
+		"babel"
+	],
+	"parser": "babel-eslint",
+	"rules":
+	{
+		"indent": ["warn", "tab",
+		{
+			"SwitchCase": 1
+		}],
+		"quotes": 0,
+		"no-console": 0,
+		"no-debugger": 1,
+		"no-var": 1,
+		"import/named": 0,
+		"semi": [
+			1,
+			"always"
+		],
+		"no-trailing-spaces": 0,
+		"eol-last": 0,
+		"no-underscore-dangle": 0,
+		"no-alert": 0,
+		"no-lone-blocks": 0,
+		"keyword-spacing": [
+			"error",
+			{
+				"before": true,
+				"after": true
+			}
+		],
+		"object-curly-spacing": [
+			"warn",
+			"always"
+		],
+		"block-spacing": [
+			"warn",
+			"always"
+		],
+		"comma-spacing": [
+			"warn",
+			{
+				"before": false,
+				"after": true
+			}
+		],
+		"semi-spacing": [
+			"warn",
+			{
+				"before": false,
+				"after": true
+			}
+		],
+		"spaced-comment": [
+			"warn",
+			"always"
+		],
+		"arrow-spacing": [
+			"warn",
+			{
+				"before": true,
+				"after": true
+			}
+		],
+		"key-spacing": [
+			"warn",
+			{
+				"beforeColon": false,
+				"afterColon": true
+			}
+		],
+		"space-infix-ops": [
+			"warn",
+			{
+				"int32Hint": false
+			}
+		],
+		"jsx-quotes": 1
+	}
+}

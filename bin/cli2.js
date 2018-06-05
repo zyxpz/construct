@@ -25,6 +25,13 @@ config.commands.forEach(opt => {
 	aCmd.action(() => {
 		require(`../lib/${Array.prototype.slice.call(process.argv, 2)[0]}`)(Array.prototype.slice.call(process.argv, 2).slice(1));
 	});
+	aCmd.on('--help', function() {
+		console.log('  Examples:');
+		console.log('');
+		console.log(`    construct ${opt.name}    ${opt.description}`);
+		console.log(`${ opt.example || '' }`);
+		console.log('');
+	});
 });
 
 /**
