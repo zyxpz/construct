@@ -1,0 +1,33 @@
+/**
+ * reset
+ */
+ html body {
+	font-size: 26px !important;
+	/*1rem=100px*/
+}
+
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	border: none;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	/**
+	 * 滚动不受阻，激活平滑滚动
+	 * ios会和fixed产生bug，比如input
+	 */
+	/* -webkit-overflow-scrolling: touch;
+	overflow-scrolling: touch; */
+	/**
+	 * 字体样式不模糊
+	 */
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	/**
+	 * 可以复制粘帖
+	 */
+	-webkit-user-select: text!important;
+	user-select: text!important;
+}

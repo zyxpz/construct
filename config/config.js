@@ -1,8 +1,8 @@
 const path = require('path');
 
 const types = {
-	'reactPackage': 'react包',
-	'generalPackage': '普通包'
+	'reactRedux': 'react-redux包',
+	'general': '普通包'
 };
 
 /**
@@ -23,15 +23,15 @@ function getTypes() {
  */
 function getQuestions() {
 	return [
-		// {
-		// 	type: 'list',
-		// 	name: 'type',
-		// 	message: '类型',
-		// 	choices: getTypes(),
-		// 	default() {
-		// 		return 'online';
-		// 	}
-		// },
+		{
+			type: 'list',
+			name: 'type',
+			message: '类型',
+			choices: getTypes(),
+			default() {
+				return 'online';
+			}
+		},
 		{
 			type: 'input',
 			name: 'name',
