@@ -29,7 +29,7 @@ function getQuestions() {
 			message: '类型',
 			choices: getTypes(),
 			default() {
-				return 'online';
+				return 'general';
 			}
 		},
 		{
