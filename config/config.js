@@ -2,7 +2,8 @@ const path = require('path');
 
 const types = {
 	'reactRedux': 'react-redux包',
-	'general': '普通包'
+	'general': '普通包',
+	'component': '组件包'
 };
 
 /**
