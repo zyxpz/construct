@@ -1,5 +1,5 @@
 {
-  "name": "construct",
+  "name": "mido-construct",
   "version": "1.0.0",
   "description": "webpack4前端框架快速构建",
   "main": "index.js",
