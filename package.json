@@ -1,6 +1,6 @@
 {
   "name": "mido-construct",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "webpack4前端框架快速构建",
   "main": "index.js",
   "bin": {
@@ -12,6 +12,13 @@
   "keywords": [
     "construct"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zyxpz/construct"
+  },
+  "bugs": {
+    "url": "https://github.com/zyxpz/construct/issues"
+  },
   "author": "mido",
   "license": "ISC",
   "dependencies": {
@@ -36,5 +43,11 @@
       "4",
       "6"
     ]
-  }
+  },
+  "files": [
+    "bin",
+    "lib",
+    "package.json",
+    "README.md"
+  ]
 }
