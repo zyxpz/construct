@@ -8,6 +8,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const milieu = process.env.NODE_ENV || 'development';
 
 const myIp = require('my-ip')();
@@ -41,21 +43,25 @@ const config = {
 		},
 		{
 			test: /\.(css|scss)$/,
-			use: [
-				MiniCssExtractPlugin.loader,
-				'css-loader',
-				'sass-loader',
-				postcssLoader,
-			]
+			// use: [
+			// 	MiniCssExtractPlugin.loader,
+			// 	'css-loader',
+			// 	'sass-loader',
+			// 	// postcssLoader,
+			// ]
+			use: ['vue-style-loader', 'css-loader', postcssLoader, 'sass-loader']
 		},
 		{
 			test: /\.less$/,
-			use: [
-				MiniCssExtractPlugin.loader,
-				'css-loader',
-				'less-loader',
-				postcssLoader,
-			],
+			// use: [
+			// 	MiniCssExtractPlugin.loader,
+			// 	'css-loader',
+			// 	'less-loader',
+			// 	// postcssLoader,
+			// ],
+			use: ExtractTextPlugin.extract({
+				use: ['css-loader', postcssLoader, 'less-loader']
+			})
 		},
 		{
 			test: /\.(png|jpg|gif|eot|ttf|woff|woff2|svg)$/,
@@ -73,7 +79,7 @@ const config = {
 	devServer: {
 		host: milieu === 'development' ? 'localhost' : myIp,
 		port: '8989',
-		stats: 'errors-only',
+		// stats: 'normal',
 	},
 	optimization: {
 		minimize: milieu === 'production' ? true : false,
@@ -88,8 +94,15 @@ const config = {
 		 */
 		splitChunks: {
 			cacheGroups: {
+				// styles: {
+				// 	name: 'styles',
+				// 	test: /\.css$/,
+				// 	chunks: 'all',
+				// 	enforce: true,
+				// 	priority: 20,
+				// },
 				commons: {
-					name: 'common.js',
+					name: 'common',
 					chunks: "all"
 				}
 			}
@@ -103,9 +116,13 @@ const config = {
 				removeAttributeQuotes: milieu === 'production' ? true : false
 			}
 		}),
-		new MiniCssExtractPlugin({
-			filename: '[name].css'
-		})
+		// new MiniCssExtractPlugin({
+		// 	filename: '[name].css'
+		// })
+		new ExtractTextPlugin({
+			filename: '[name].css',
+			allChunks: true
+		}),
 	]
 };
 

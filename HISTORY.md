@@ -1,3 +1,6 @@
+# 1.0.6
+- add postcss
+
 # 1.0.5
 - bugfix node依赖要加入pkg
 
