@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 
+const path = require('path');
+
 const webpackMerge = require('webpack-merge');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -15,6 +17,15 @@ const APP_PATH = process.cwd();
 const {
 	entry
 } = require('./package.json');
+
+const postcssLoader = {
+	loader: 'postcss-loader',
+	options: {
+		config: {
+			path: path.resolve(APP_PATH, 'postcss.config.js')
+		}
+	}
+};
 
 const config = {
 	mode: milieu,
@@ -33,7 +44,8 @@ const config = {
 			use: [
 				MiniCssExtractPlugin.loader,
 				'css-loader',
-				'sass-loader'
+				'sass-loader',
+				postcssLoader,
 			]
 		},
 		{
@@ -42,6 +54,7 @@ const config = {
 				MiniCssExtractPlugin.loader,
 				'css-loader',
 				'less-loader',
+				postcssLoader,
 			],
 		},
 		{
@@ -59,12 +72,28 @@ const config = {
 	},
 	devServer: {
 		host: milieu === 'development' ? 'localhost' : myIp,
-		port: '<%=port%>'
+		port: '8989',
+		stats: 'errors-only',
 	},
 	optimization: {
 		minimize: milieu === 'production' ? true : false,
+		// 原：NamedModulesPlugin()
 		namedModules: true,
+		// 原：NoEmitOnErrorsPlugin() - 异常继续执行
 		noEmitOnErrors: true,
+		// 原：ModuleConcatenationPlugin() - 模块串联 - dev模式下回影响antd（比如：Pagination, 和语言有关）
+		concatenateModules: milieu !== 'development',
+		/**
+		 * CommonsChunkPlugin
+		 */
+		splitChunks: {
+			cacheGroups: {
+				commons: {
+					name: 'common.js',
+					chunks: "all"
+				}
+			}
+		}
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -76,12 +105,12 @@ const config = {
 		}),
 		new MiniCssExtractPlugin({
 			filename: '[name].css'
-		}),
-		new webpack.EvalSourceMapDevToolPlugin({
-			filename: '[name].js.map',
-		}),
+		})
 	]
 };
 
+if (milieu === 'development') {
+	config.devtool = 'cheap-module-eval-source-map';
+}
 
 module.exports = config;

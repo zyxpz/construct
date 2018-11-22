@@ -1,10 +1,10 @@
 {
   "name": "mido-construct",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "webpack4前端框架快速构建",
   "main": "index.js",
   "bin": {
-    "construct": "./bin/cli.js"
+    "mido-construct": "./bin/cli.js"
   },
   "scripts": {
     "lint": "esw ./bin/*.* ./config/*.* ./lib/**/*.js --fix --watch"

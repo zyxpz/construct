@@ -5,4 +5,4 @@
 
 * -s, 创建目录地址 
 * -p, --port 端口
-* construct init -p 8989 -s 目录
+* mido-construct init -p 8989 -s 目录
