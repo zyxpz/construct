@@ -8,8 +8,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 const milieu = process.env.NODE_ENV || 'development';
 
 const myIp = require('my-ip')();
@@ -43,25 +41,21 @@ const config = {
 		},
 		{
 			test: /\.(css|scss)$/,
-			// use: [
-			// 	MiniCssExtractPlugin.loader,
-			// 	'css-loader',
-			// 	'sass-loader',
-			// 	// postcssLoader,
-			// ]
-			use: ['vue-style-loader', 'css-loader', postcssLoader, 'sass-loader']
+			use: [
+				MiniCssExtractPlugin.loader,
+				'css-loader',
+				'sass-loader',
+				postcssLoader,
+			]
 		},
 		{
 			test: /\.less$/,
-			// use: [
-			// 	MiniCssExtractPlugin.loader,
-			// 	'css-loader',
-			// 	'less-loader',
-			// 	// postcssLoader,
-			// ],
-			use: ExtractTextPlugin.extract({
-				use: ['css-loader', postcssLoader, 'less-loader']
-			})
+			use: [
+				MiniCssExtractPlugin.loader,
+				'css-loader',
+				'less-loader',
+				postcssLoader,
+			],
 		},
 		{
 			test: /\.(png|jpg|gif|eot|ttf|woff|woff2|svg)$/,
@@ -78,8 +72,8 @@ const config = {
 	},
 	devServer: {
 		host: milieu === 'development' ? 'localhost' : myIp,
-		port: '8989',
-		// stats: 'normal',
+		port: '<%=port%>',
+		stats: 'normal',
 	},
 	optimization: {
 		minimize: milieu === 'production' ? true : false,
@@ -94,16 +88,24 @@ const config = {
 		 */
 		splitChunks: {
 			cacheGroups: {
-				// styles: {
-				// 	name: 'styles',
-				// 	test: /\.css$/,
-				// 	chunks: 'all',
-				// 	enforce: true,
-				// 	priority: 20,
-				// },
-				commons: {
-					name: 'common',
-					chunks: "all"
+				vendor: { // node_modules内的依赖库
+					chunks: "all",
+					test: /[\\/]node_modules[\\/]/,
+					name: "vendor",
+					minChunks: 1, // 被不同entry引用次数(import),1次的话没必要提取
+					maxInitialRequests: 5,
+					minSize: 0,
+					priority: 100,
+					// enforce: true?
+				},
+				common: { // ‘src/js’ 下的js文件
+					chunks: "all",
+					test: /[\\/]src[\\/]js[\\/]/, // 也可以值文件/[\\/]src[\\/]js[\\/].*\.js/,  
+					name: "common", // 生成文件名，依据output规则
+					minChunks: 2,
+					maxInitialRequests: 5,
+					minSize: 0,
+					priority: 1
 				}
 			}
 		}
@@ -116,13 +118,9 @@ const config = {
 				removeAttributeQuotes: milieu === 'production' ? true : false
 			}
 		}),
-		// new MiniCssExtractPlugin({
-		// 	filename: '[name].css'
-		// })
-		new ExtractTextPlugin({
-			filename: '[name].css',
-			allChunks: true
-		}),
+		new MiniCssExtractPlugin({
+			filename: '[name].css'
+		})
 	]
 };
 

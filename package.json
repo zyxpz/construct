@@ -1,6 +1,6 @@
 {
   "name": "mido-construct",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "webpack4前端框架快速构建",
   "main": "index.js",
   "bin": {
