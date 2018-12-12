@@ -44,8 +44,8 @@ const config = {
 			use: [
 				MiniCssExtractPlugin.loader,
 				'css-loader',
-				'sass-loader',
 				postcssLoader,
+				'sass-loader',
 			]
 		},
 		{
@@ -53,8 +53,8 @@ const config = {
 			use: [
 				MiniCssExtractPlugin.loader,
 				'css-loader',
-				'less-loader',
 				postcssLoader,
+				'less-loader',
 			],
 		},
 		{
