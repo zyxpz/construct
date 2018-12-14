@@ -113,7 +113,7 @@ const config = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './src/test-index.html',
-			inject: false,
+			inject: 'body',
 			minify: {
 				removeAttributeQuotes: milieu === 'production' ? true : false
 			}

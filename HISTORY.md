@@ -1,3 +1,6 @@
+# 1.0.9
+- add babel-plugin-transform-runtime
+
 # 1.0.7
 - change splitChunks
 
