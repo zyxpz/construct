@@ -1,3 +1,7 @@
+# 1.1.1
+- bugfix
+- remove 多余插件
+
 # 1.1.0
 - add vue
 
