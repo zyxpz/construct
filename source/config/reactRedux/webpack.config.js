@@ -16,6 +16,15 @@ const {
 	entry
 } = require('./package.json');
 
+const postcssLoader = {
+	loader: 'postcss-loader',
+	options: {
+		config: {
+			path: path.resolve(APP_PATH, 'postcss.config.js')
+		}
+	}
+};
+
 const config = {
 	mode: milieu,
 	resolve: {
@@ -37,7 +46,8 @@ const config = {
 			use: [
 				MiniCssExtractPlugin.loader,
 				'css-loader',
-				'sass-loader'
+				postcssLoader,
+				'sass-loader',
 			]
 		},
 		{
@@ -45,7 +55,8 @@ const config = {
 			use: [
 				MiniCssExtractPlugin.loader,
 				'css-loader',
-				'less-loader',
+				postcssLoader,
+				'sass-loader',
 			],
 		},
 		{
@@ -91,6 +102,10 @@ config.externals = {
 	'react': 'React',
 	'react-dom': 'ReactDOM'
 };
+
+if (milieu === 'development') {
+	config.devtool = 'cheap-module-eval-source-map';
+}
 
 
 module.exports = config;
