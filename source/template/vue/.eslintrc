@@ -1,0 +1,48 @@
+{
+  "env": {
+      "browser": true,
+      "commonjs": true,
+      "es6": true
+  },
+  "extends": [
+      "plugin:vue/essential",
+      "airbnb-base"
+  ],
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+  },
+  "rules": {
+      "indent": [
+          "off",
+          "tab"
+      ],
+      "linebreak-style": [
+          "error",
+          "unix"
+      ],
+      "quotes": [
+          "error",
+          "single"
+      ],
+      "semi": [
+          "error",
+          "always"
+      ],
+      "semi-style": [
+          "error",
+          "last"
+      ],
+      "no-extra-parens": 1,
+      "no-console": 1,
+      "no-alert": 0,
+      "no-lonely-if": 2,
+      "import/no-unresolved": 0,
+      "no-tabs": 0,
+      "import/no-extraneous-dependencies": 0,
+      "keyword-spacing": 1
+  }
+}
