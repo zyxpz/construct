@@ -1,3 +1,6 @@
+# 1.1.0
+- add vue
+
 # 1.0.9
 - add babel-plugin-transform-runtime
 
