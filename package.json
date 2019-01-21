@@ -7,7 +7,8 @@
     "mido-construct": "./bin/cli.js"
   },
   "scripts": {
-    "lint": "esw ./bin/*.* ./config/*.* ./lib/**/*.js --fix --watch"
+    "lint": "esw ./bin/*.* ./config/*.* ./lib/**/*.js --fix --watch",
+    "dev": "node ./bin/cli2 dev mock"
   },
   "keywords": [
     "construct"

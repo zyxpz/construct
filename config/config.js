@@ -84,6 +84,24 @@ module.exports = {
 					description: '创建路径'
 				}
 			]
+		},
+		{
+			name: 'dev',
+			description: '本地服务',
+			options: [
+				{
+					name: '-c, --config <d>',
+					description: 'webpack路径'
+				},
+				{
+					name: '-m, --mock',
+					description: '是否开启本地mock'
+				},
+				{
+					name: '-p, --port',
+					description: '端口'
+				}
+			]
 		}
 	],
 	getQuestions
