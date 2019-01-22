@@ -1,4 +1,4 @@
-const webpack = require('../webpack.js');
+const webpack = require('../../lib/webpack/webpack.js');
 
 const APP_PATH = process.cwd();
 
@@ -17,6 +17,8 @@ const {
 const {
 	entry
 } = require(path.resolve(APP_PATH, 'package.json'));
+
+const babelOptions = require('./babelOptions')();
 
 const postcssLoader = {
 	loader: 'postcss-loader',
@@ -37,49 +39,32 @@ module.exports = function (args = {}) {
 			modules: [path.resolve(APP_PATH, 'src'), 'node_modules'],
 			extensions: ['.js', 'jsx', '.vue', 'ts', '.json', '.less', '.css'],
 			alias: {
-
+				vue$: 'vue/dist/vue.esm.js',
+				node_modules: path.resolve(APP_PATH, 'node_modules'),
 			}
 		},
 		entry,
 		output: {
 			path: path.resolve(APP_PATH, 'dist'),
-			filename: '[name].[hash:8].js', // 每个页面对应的主js的生成配置
-			chunkFilename: '[name].[hash:8].js', // chunk生成的配置
-			sourceMapFilename: '[name].[hash:8].map',
-			/**
-			 * html引用路径
-			 */
-			publicPath: mode === 'production' ? '/mido-h5-cp/dist' : '/'
+			filename: '[name].js', // 每个页面对应的主js的生成配置
+			chunkFilename: '[name].js', // chunk生成的配置
+			sourceMapFilename: '[name].map',
 		},
 		module: {
 			rules: [{
-				test: /\.js?$/,
-				exclude: [
-					/**
-						 * 在node_modules的文件不被babel理会
-						 */
-					path.resolve(APP_PATH, 'node_modules')
-				],
+				test: /\.(js|jsx)?$/,
+				exclude: /node_modules/,
 				use: [{
-					loader: 'babel-loader',
-					options: {
-						cacheDirectory: true // 启用编译缓存
-					}
+					loader: require.resolve('babel-loader'),
+					options: babelOptions
 				}]
 			},
 			{
 				test: /\.ts?$/,
-				exclude: [
-					/**
-						 * 在node_modules的文件不被babel理会
-						 */
-					path.resolve(APP_PATH, 'node_modules')
-				],
+				exclude: /node_modules/,
 				use: [{
-					loader: 'babel-loader',
-					options: {
-						cacheDirectory: true // 启用编译缓存
-					}
+					loader: require.resolve('babel-loader'),
+					options: babelOptions
 				}, {
 					loader: 'ts-loader',
 				}]
@@ -120,7 +105,7 @@ module.exports = function (args = {}) {
 			},
 			{
 				test: /\.html$/i,
-				loader: 'file-loader',
+				loader: require.resolve('file-loader'),
 				options: {
 					name: '[name].[ext]'
 				}
@@ -168,7 +153,7 @@ module.exports = function (args = {}) {
 		},
 		plugins: [
 			new MiniCssExtractPlugin({
-				filename: '[name].[hash:8].css',
+				filename: '[name].css',
 				allChunks: true
 			}),
 			new webpack.ProvidePlugin({

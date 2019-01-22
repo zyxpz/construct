@@ -1,6 +1,6 @@
 const path = require('path');
 
-const webpack = require('../webpack');
+const webpack = require('../../lib/webpack/webpack');
 
 const WebpackDevServer = require('webpack-dev-server');
 

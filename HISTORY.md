@@ -1,3 +1,7 @@
+# 1.1.2-beta
+- add: dev开发模式
+- add: build打包模式
+
 # 1.1.1
 - bugfix
 - remove 多余插件

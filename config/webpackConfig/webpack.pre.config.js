@@ -1,4 +1,4 @@
-const webpack = require('../webpack');
+const webpack = require('../../lib/webpack/webpack');
 
 const webpackMerge = require('webpack-merge');
 
@@ -15,7 +15,8 @@ module.exports = function (args) {
 	} = args;
   
 	const {
-		commonConfig
+		commonConfig,
+		APP_PATH
 	} = webpackCommon({
 		mode
 	});

@@ -90,10 +90,6 @@ module.exports = {
 			description: '本地服务',
 			options: [
 				{
-					name: '-c, --config <d>',
-					description: 'webpack路径'
-				},
-				{
 					name: '-m, --mock',
 					description: '是否开启本地mock'
 				},
@@ -102,6 +98,10 @@ module.exports = {
 					description: '端口'
 				}
 			]
+		},
+		{
+			name: 'build',
+			description: '打包'
 		}
 	],
 	getQuestions
