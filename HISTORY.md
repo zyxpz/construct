@@ -1,3 +1,6 @@
+# 1.1.3-beta2
+- 对vue的支持
+
 # 1.1.3-beta1
 - 修复css,less 引入postcss的bug
 

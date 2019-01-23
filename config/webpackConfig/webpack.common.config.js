@@ -23,7 +23,7 @@ const configPath = path.resolve(APP_PATH, 'config/config.js');
 const babelOptions = require('./babelOptions')();
 
 const postcssLoader = {
-	loader: 'postcss-loader',
+	loader: require.resolve('postcss-loader'),
 	options: {
 		config: {
 			path: path.join(__dirname, 'postcss.config.js')
@@ -46,7 +46,7 @@ module.exports = function (args = {}) {
 		resolve: {
 			mainFiles: ['index'],
 			modules: [path.resolve(APP_PATH, 'src'), 'node_modules'],
-			extensions: ['.js', 'jsx', '.vue', 'ts', '.json', '.less', '.css'],
+			extensions: ['.js', '.jsx', '.vue', 'ts', '.json', '.less', '.css'],
 			alias: {
 				vue$: 'vue/dist/vue.esm.js',
 				node_modules: path.resolve(APP_PATH, 'node_modules'),
@@ -75,39 +75,38 @@ module.exports = function (args = {}) {
 					loader: require.resolve('babel-loader'),
 					options: babelOptions
 				}, {
-					loader: 'ts-loader',
+					loader: require.resolve('ts-loader'),
 				}]
 			},
 			{
 				test: /\.vue?$/,
 				use: [
-					'vue-loader',
+					{	loader: require.resolve('vue-loader'),  }
 				],
 				exclude: /node_modules/,
 			},
 			{
-				test: /\.(css|scss)$/,
+				test: /\.css$/,
 				use: [
-					'vue-style-loader',
+					{ loader: require.resolve('vue-style-loader') },
 					MiniCssExtractPlugin.loader,
-					'css-loader',
+					{ loader: require.resolve('css-loader') },
 					postcssLoader,
-					'sass-loader',
 				]
 			},
 			{
 				test: /\.less$/,
 				use: [
-					'vue-style-loader',
+					{ loader: require.resolve('vue-style-loader') },
 					MiniCssExtractPlugin.loader,
-					'css-loader',
+					{ loader: require.resolve('css-loader') },
 					postcssLoader,
-					'less-loader',
+					{ loader: require.resolve('less-loader') }
 				],
 			},
 			{
 				test: /\.(png|jpg|gif|eot|ttf|woff|woff2|svg)$/,
-				loader: 'url-loader',
+				loader: require.resolve('url-loader'),
 				options: {
 					limit: 10000
 				}
@@ -121,7 +120,7 @@ module.exports = function (args = {}) {
 			},
 			{
 				test: /\.atpl?$/,
-				use: 'atpl-loader'
+				loader: require.resolve('atpl-loader')
 			}
 			]
 		},
