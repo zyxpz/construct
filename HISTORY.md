@@ -1,6 +1,8 @@
 # 1.1.2-beta
 - add: dev开发模式
 - add: build打包模式
+- add: babel 用户自定义
+- add: webpack 用户自定义
 
 # 1.1.1
 - bugfix

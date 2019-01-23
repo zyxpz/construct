@@ -18,6 +18,10 @@ const {
 	entry
 } = require(path.resolve(APP_PATH, 'package.json'));
 
+const configPath = path.resolve(APP_PATH, 'config/config.js');
+
+
+
 const babelOptions = require('./babelOptions')();
 
 const postcssLoader = {
@@ -178,9 +182,16 @@ module.exports = function (args = {}) {
 		cache: true,
 	};
 
+	let userWebpack = {};
+	if (configPath) {
+		userWebpack = require(configPath).webpack;
+	}
+
+	let frameWebpack = webpackMerge(config, defaultConfig);
+
 	return {
 		APP_PATH,
 		myip,
-		commonConfig: webpackMerge(config, defaultConfig)
+		commonConfig: webpackMerge(frameWebpack, userWebpack)
 	};
 };

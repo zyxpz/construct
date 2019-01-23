@@ -1,5 +1,17 @@
+const path = require('path');
+
+const APP_PATH = process.cwd();
+
+const configPath = path.resolve(APP_PATH, 'config/config.js');
+
 module.exports = function babel() {
-	return {
+
+	let userBabel = {};
+	if (configPath) {
+		 userBabel = require(configPath).babel;
+	}
+
+	const defaultBabel = {
 		cacheDirectory: true,
 		presets: [
 			require.resolve('@babel/preset-env'),
@@ -19,4 +31,21 @@ module.exports = function babel() {
 			require.resolve('babel-plugin-transform-vue-jsx')
 		]
 	};
+
+	for (const key in defaultBabel) {
+		if (Object.hasOwnProperty.call(defaultBabel, key)) {
+			let defaultValue = defaultBabel[key];
+			for (const uKey in userBabel) {
+				if (userBabel.hasOwnProperty.call(userBabel, uKey)) {
+					const userValue = userBabel[uKey];
+					if (uKey === key && Array.isArray(defaultValue) && Array.isArray(userValue)) {
+						defaultValue.push(...userValue);
+					} else if (!Array.isArray(defaultValue) && !Array.isArray(userValue))  {
+						defaultValue = Object.assign(defaultValue, userValue);
+					}
+				}
+			}
+		}
+	}
+	return Object.assign(userBabel, defaultBabel);
 };
