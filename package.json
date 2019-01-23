@@ -4,7 +4,7 @@
   "description": "webpack4前端框架快速构建",
   "main": "index.js",
   "bin": {
-    "mido-construct": "./bin/cli.js"
+    "mido": "./bin/cli.js"
   },
   "scripts": {
     "lint": "esw ./bin/*.* ./config/*.* ./lib/**/*.js --fix --watch"
@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/zyxpz/construct/issues"
   },
-  "author": "mido",
+  "author": "Midnight Bules <Mythmxlcool@vip.qq.com>",
   "license": "ISC",
   "dependencies": {
     "@babel/cli": "^7.2.3",
