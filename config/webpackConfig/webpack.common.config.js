@@ -20,18 +20,23 @@ const {
 
 const configPath = path.resolve(APP_PATH, 'config/config.js');
 
-
-
 const babelOptions = require('./babelOptions')();
 
 const postcssLoader = {
 	loader: 'postcss-loader',
 	options: {
 		config: {
-			path: path.resolve('config/postcss.config.js')
+			path: path.join(__dirname, 'postcss.config.js')
 		}
 	}
 };
+
+let userWebpack = {}; // 用户定义微博pack
+let userSetConfig = {}; // 用户定义配置
+if (configPath) {
+	userWebpack = require(configPath).webpack;
+	userSetConfig = require(configPath).config;
+}
 
 module.exports = function (args = {}) {
 	const {
@@ -181,11 +186,6 @@ module.exports = function (args = {}) {
 		// 启用编译缓存
 		cache: true,
 	};
-
-	let userWebpack = {};
-	if (configPath) {
-		userWebpack = require(configPath).webpack;
-	}
 
 	let frameWebpack = webpackMerge(config, defaultConfig);
 

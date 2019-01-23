@@ -1,3 +1,6 @@
+# 1.1.3-beta1
+- 修复css,less 引入postcss的bug
+
 # 1.1.2-beta
 - add: dev开发模式
 - add: build打包模式

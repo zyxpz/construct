@@ -85,3 +85,11 @@ exports.webpack = {
 }
 ```
 - webpack 配置项类似于webpack.config.js
+
+## config
+```vim
+exports.config = {
+
+}
+```
+- 暂时没有api
