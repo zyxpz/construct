@@ -49,18 +49,18 @@ module.exports = function (args) {
 	};
 
 	config.plugins.push(
-		// new FriendlyErrorsWebpackPlugin({
-		// 	compilationSuccessInfo: {
-		// 		messages: [`Dev Server: http://localhost:${port}`],
-		// 		notes: [`Success!`]
-		// 	},
-		// 	onErrors: (error) => {
-		// 		console.log(error);
-		// 	},
-		// 	clearConsole: true,
-		// 	additionalFormatters: [],
-		// 	additionalTransformers: []
-		// }),
+		new FriendlyErrorsWebpackPlugin({
+			compilationSuccessInfo: {
+				messages: [`Dev Server: http://localhost:${port}`],
+				notes: [`Success!`]
+			},
+			onErrors: (error) => {
+				console.log(error);
+			},
+			clearConsole: true,
+			additionalFormatters: [],
+			additionalTransformers: []
+		}),
 		new webpack.ProgressPlugin(handler)
 	);
 
@@ -71,8 +71,8 @@ module.exports = function (args) {
 		historyApiFallback: false,
 		hot: true,
 		inline: true,
-		// stats: 'none',
-		// quiet: true,
+		stats: 'none',
+		quiet: true,
 		overlay: true,
 		inline: true,
 		hot: true,
