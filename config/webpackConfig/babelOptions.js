@@ -35,13 +35,15 @@ module.exports = function babel() {
 	for (const key in defaultBabel) {
 		if (Object.hasOwnProperty.call(defaultBabel, key)) {
 			let defaultValue = defaultBabel[key];
-			for (const uKey in userBabel) {
-				if (userBabel.hasOwnProperty.call(userBabel, uKey)) {
-					const userValue = userBabel[uKey];
-					if (uKey === key && Array.isArray(defaultValue) && Array.isArray(userValue)) {
-						defaultValue.push(...userValue);
-					} else if (!Array.isArray(defaultValue) && !Array.isArray(userValue))  {
-						defaultValue = Object.assign(defaultValue, userValue);
+			if (userBabel) {
+				for (const uKey in userBabel) {
+					if (userBabel.hasOwnProperty.call(userBabel, uKey)) {
+						const userValue = userBabel[uKey];
+						if (uKey === key && Array.isArray(defaultValue) && Array.isArray(userValue)) {
+							defaultValue.push(...userValue);
+						} else if (!Array.isArray(defaultValue) && !Array.isArray(userValue))  {
+							defaultValue = Object.assign(defaultValue, userValue);
+						}
 					}
 				}
 			}

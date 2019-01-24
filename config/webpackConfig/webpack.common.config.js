@@ -31,8 +31,7 @@ const postcssLoader = {
 	}
 };
 
-let userWebpack = {}; // 用户定义微博pack
-let userSetConfig = {}; // 用户定义配置
+let userWebpack = {}; // 用户定义webpack
 if (configPath) {
 	userWebpack = require(configPath).webpack;
 	userSetConfig = require(configPath).config;
@@ -69,7 +68,7 @@ module.exports = function (args = {}) {
 				}]
 			},
 			{
-				test: /\.ts?$/,
+				test: /\.(ts|tsx)?$/,
 				exclude: /node_modules/,
 				use: [{
 					loader: require.resolve('babel-loader'),
@@ -191,6 +190,6 @@ module.exports = function (args = {}) {
 	return {
 		APP_PATH,
 		myip,
-		commonConfig: webpackMerge(frameWebpack, userWebpack)
+		commonConfig: webpackMerge(userWebpack, frameWebpack)
 	};
 };
