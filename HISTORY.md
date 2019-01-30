@@ -1,3 +1,7 @@
+# 1.1.3-beta5
+- html单独文件夹配置时的支持
+- 输出react react-dom
+
 # 1.1.3-beta4
 - dev 工作台输出
 

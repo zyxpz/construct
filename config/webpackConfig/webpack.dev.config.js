@@ -67,7 +67,7 @@ module.exports = function (args) {
 	const compiler = webpack(config);
 
 	const server = new WebpackDevServer(compiler, {
-		contentBase: path.join(__dirname, 'dist'),
+		// contentBase: path.join(__dirname, 'dist'),
 		historyApiFallback: false,
 		hot: true,
 		inline: true,
@@ -75,7 +75,6 @@ module.exports = function (args) {
 		quiet: true,
 		overlay: true,
 		inline: true,
-		hot: true,
 		compress: true,
 		watchOptions: {
 			aggregateTimeout: 300,
