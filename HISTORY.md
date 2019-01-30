@@ -1,4 +1,4 @@
-# 1.1.3-beta5
+# 1.1.3-beta6
 - html单独文件夹配置时的支持
 - 输出react react-dom
 
