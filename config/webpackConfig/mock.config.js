@@ -28,7 +28,9 @@ fs.readdirSync(directory, {
 		const fileExtName = path.extname(filePath);
 		if (fileExtName === '.js') {
 			const fileBasename = path.basename(filePath);
-			console.log(filePath, fileBasename);
+			if (fileBasename.indexOf('.mock.js') > -1) {
+				console.log(filePath);
+			}
 		}
 	}
 });
