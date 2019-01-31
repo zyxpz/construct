@@ -1,5 +1,7 @@
 const path = require('path');
 
+const fs = require('fs-extra');
+
 const APP_PATH = process.cwd();
 
 const configPath = path.resolve(APP_PATH, 'config/config.js');
@@ -9,6 +11,27 @@ let mockProxy = {};
 if (configPath) {
 	mockProxy = require(configPath).proxy || {};
 }
+
+const directory = path.join(APP_PATH, 'mock');
+
+fs.readdirSync(directory, {
+	encoding: 'utf-8'
+}).forEach(file => {
+	// 文件路径
+	const filePath = path.join(directory, file);
+
+	// 文件状态
+	const fileStat = fs.statSync(filePath);
+
+	if (fileStat.isFile()) {
+		// 文件后缀
+		const fileExtName = path.extname(filePath);
+		if (fileExtName === '.js') {
+			
+		}
+		console.log(fileExtName);
+	}
+});
 
 module.exports = function (arges = {}) {
 	const {

@@ -44,10 +44,10 @@ scripts: {
 exports.proxy = {
 	dev: {
 		'/api': {
-			target: 'http://localhost:9001'
+			target: 'http://localhost' // target为空默认为localhost
 		},
 		'/some': {
-			target: 'http://localhost:9002'
+			target: 'http://localhost'
 		}
 	},
 	test: {
