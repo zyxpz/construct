@@ -12,12 +12,14 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const webpackCommon = require('./webpack.common.config');
 
-module.exports = function (args) {
+const mockData = require('./mock.config');
 
+module.exports = function (args) {
 	const {
 		mode,
-		userConfig,
-		port
+		port,
+		mock,
+		milieu,
 	} = args;
 
 	const stream = process.stderr;
@@ -66,7 +68,7 @@ module.exports = function (args) {
 
 	const compiler = webpack(config);
 
-	const server = new WebpackDevServer(compiler, {
+	let serverOption = {
 		// contentBase: path.join(__dirname, 'dist'),
 		historyApiFallback: false,
 		hot: true,
@@ -110,17 +112,19 @@ module.exports = function (args) {
 		// 		});
 		// 	});
 		// }
-	});
+	};
 
-	process.stdin.resume();
-
-	['SIGINT', 'SIGTERM'].forEach(signal => {
-		process.on(signal, () => {
-			server.close(() => {
-				process.exit(0);
+	if (mock) {
+		if (milieu === 'test' || milieu === 'pre') {
+			serverOption.proxy = mockData({
+				milieu
 			});
-		});
-	});
+		}
+
+		console.log(serverOption, 'serverOption');
+	}
+
+	const server = new WebpackDevServer(compiler, serverOption);
 
 	server.listen(port, 'localhost', err => {
 		if (err) {
@@ -128,9 +132,4 @@ module.exports = function (args) {
 			return;
 		}
 	});
-
-	process.on('message', () => {
-		server.close();
-	});
-
 };

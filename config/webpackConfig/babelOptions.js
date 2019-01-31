@@ -8,7 +8,7 @@ module.exports = function babel() {
 
 	let userBabel = {};
 	if (configPath) {
-		 userBabel = require(configPath).babel;
+		 userBabel = require(configPath).babel || {};
 	}
 
 	const defaultBabel = {
