@@ -27,9 +27,9 @@ fs.readdirSync(directory, {
 		// 文件后缀
 		const fileExtName = path.extname(filePath);
 		if (fileExtName === '.js') {
-			
+			const fileBasename = path.basename(filePath);
+			console.log(filePath, fileBasename);
 		}
-		console.log(fileExtName);
 	}
 });
 
