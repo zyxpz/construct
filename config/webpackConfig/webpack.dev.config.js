@@ -119,11 +119,13 @@ module.exports = function (args) {
 			serverOption.proxy = mockData({
 				milieu
 			});
+		} else if (milieu === 'test') {
+			serverOption.before = () => {
+				
+			};
 		}
-
-		console.log(serverOption, 'serverOption');
 	}
-
+	console.log(serverOption, 'serverOption');
 	const server = new WebpackDevServer(compiler, serverOption);
 
 	server.listen(port, 'localhost', err => {

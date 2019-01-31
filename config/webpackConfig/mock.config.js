@@ -15,31 +15,38 @@ module.exports = function (arges = {}) {
 		milieu = 'dev'
 	} = arges;
 	let proxy = {};
+
 	switch (milieu) {
 		case 'dev':
       
 			break;
-		case 'test': 
-			proxy = {
-				'/api': {
-					target: "https://render.alipay.com",
-					changeOrigin: true,
-					pathRewrite: {
-						'^/api': ''
-					}
+		case 'test':
+			for (const key in mockProxy[milieu]) {
+				const setKey = `^${key}`;
+				if (Object.hasOwnProperty.call(mockProxy[milieu], key)) {
+					proxy[key] = {
+						...mockProxy[milieu][key],
+						changeOrigin: true,
+						pathRewrite: {
+							[setKey]: ''
+						}
+					};
 				}
-			};
-			return proxy; 
+			}
+			return proxy;
 		case 'pre':
-			proxy = {
-				'/api': {
-					target: "https://render.alipay.com",
-					changeOrigin: true,
-					pathRewrite: {
-						'^/api': ''
-					}
+			for (const key in mockProxy[milieu]) {
+				const setKey = `^${key}`;
+				if (Object.hasOwnProperty.call(mockProxy[milieu], key)) {
+					proxy[key] = {
+						...mockProxy[milieu][key],
+						changeOrigin: true,
+						pathRewrite: {
+							[setKey]: ''
+						}
+					};
 				}
-			};
+			}
 			return proxy; 
 		default:
 			break;
