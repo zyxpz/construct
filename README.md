@@ -1,4 +1,4 @@
-# webpack4 前端框架脚手架
+c# webpack4 前端框架脚手架
 
 ## api
 ### version < 1.1.2-beta
@@ -22,7 +22,9 @@ ___
 ### mido dev 开发模式
 ```vim
 scripts: {
-  "dev": "mido dev mock(暂不支持) --port 9001"
+  "dev": "mido dev mock=dev --port 9001", // 开发环境本地mock数据
+	"test": "mido dev mock=test --port 9001", // 测试环境，测试服务器数据
+	"pre": "mido dev mock=pre --port 9001", // 线上环境，向上服务器
 }
 ```
 
@@ -36,6 +38,36 @@ scripts: {
 # 自定义配置项
 
 ## 目录根路径 config/config.js
+
+## proxy
+```vim
+exports.proxy = {
+	dev: {
+		'/api': {
+			target: 'http://localhost:9001'
+		},
+		'/some': {
+			target: 'http://localhost:9002'
+		}
+	},
+	test: {
+		'/api': {
+			target: 'http://xxx.xxx.com'
+		},
+		'/some': {
+			target: 'http://xxx.xxx:9002'
+		}
+	},
+	pre: {
+		'/api': {
+			target: 'https://www.alipay.com'
+		}
+	}
+}
+```
+- dev 为本地mock数据，数据取自mock文件下的**.mock.js
+- test 为开发环境服务器数据，由框架代理。
+- pre 为线上环境服务器数据，由框架代理。
 
 ## .babelrc
 ```vim
@@ -85,11 +117,3 @@ exports.webpack = {
 }
 ```
 - webpack 配置项类似于webpack.config.js
-
-## config
-```vim
-exports.config = {
-
-}
-```
-- 暂时没有api
