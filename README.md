@@ -1,4 +1,4 @@
-c# webpack4 前端框架脚手架
+# webpack4 前端框架脚手架
 
 ## api
 ### version < 1.1.2-beta
