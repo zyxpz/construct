@@ -83,35 +83,6 @@ module.exports = function (args) {
 			poll: 1000,
 			ignored: /node_modules/,
 		},
-		// before: (app) => {
-		// 	mockJs(app);
-		// }
-		// before: function(app, server) {
-		// 	app.get('/some/get.json', function(req, res) {
-		// 		setTimeout(() => {
-		// 			res.json({ custom: 'response', stat: 'ok' });
-		// 		}, 1000);
-
-		// 	});
-		// 	app.post('/some/post.json', function(req, res) {
-		// 		res.json({
-		// 			msg: 'post',
-		// 			stat: 'ok'
-		// 		});
-		// 	});
-		// 	app.delete('/some/delete.json', function(req, res) {
-		// 		res.json({
-		// 			msg: 'delete',
-		// 			stat: 'ok'
-		// 		});
-		// 	});
-		// 	app.put('/some/put.json', function(req, res) {
-		// 		res.json({
-		// 			msg: 'put',
-		// 			stat: 'ok'
-		// 		});
-		// 	});
-		// }
 	};
 
 	if (mock) {
@@ -120,9 +91,10 @@ module.exports = function (args) {
 				milieu
 			});
 		} else if (milieu === 'dev') {
-			serverOption.before = () => {
+			serverOption.before = (app) => {
 				mockData({
-					milieu
+					milieu,
+					app
 				});
 			};
 		}

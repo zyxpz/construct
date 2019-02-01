@@ -1,3 +1,7 @@
+# 1.1.3-beta7
+- 添加mock数据系统
+- 分为dev,test,pre
+
 # 1.1.3-beta6
 - html单独文件夹配置时的支持
 - 输出react react-dom

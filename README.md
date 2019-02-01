@@ -24,7 +24,7 @@ ___
 scripts: {
   "dev": "mido dev mock=dev --port 9001", // 开发环境本地mock数据
 	"test": "mido dev mock=test --port 9001", // 测试环境，测试服务器数据
-	"pre": "mido dev mock=pre --port 9001", // 线上环境，向上服务器
+	"pre": "mido dev mock=pre --port 9001", // 线上环境，线上服务器
 }
 ```
 
@@ -65,9 +65,38 @@ exports.proxy = {
 	}
 }
 ```
-- dev 为本地mock数据，数据取自mock文件下的**.mock.js
-- test 为开发环境服务器数据，由框架代理。
-- pre 为线上环境服务器数据，由框架代理。
+- 服务器地址配置：
+  - dev 为本地mock数据，数据取自mock文件下的**.mock.js
+  - test 为开发环境服务器数据，由框架代理。
+  - pre 为线上环境服务器数据，由框架代理。
+- Dev下mock数据配置：
+  - 根目录下创建mock文件夹
+	- mock文件必须为*.mock.js文件
+
+- 可以是数据返回
+```vim
+const some = {
+  stat: 'fail'
+}
+
+module.exports = {
+  'GET /some.json': some, 
+}
+```
+- 也可以是函数
+```vim
+const init = {
+  stat: 'ok'
+}
+
+module.exports = {
+  'GET /init.json': function(req, res) {
+    res.json({
+      stat: 'ok'
+    })
+  }
+}
+```
 
 ## .babelrc
 ```vim
