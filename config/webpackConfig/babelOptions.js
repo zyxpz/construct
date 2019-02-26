@@ -27,6 +27,7 @@ module.exports = function babel() {
 					"useESModules": false
 				},
 			],
+			require.resolve('@babel/plugin-transform-react-jsx'),
 			require.resolve('babel-plugin-syntax-jsx'),
 			require.resolve('babel-plugin-transform-vue-jsx')
 		]

@@ -163,9 +163,6 @@ module.exports = function (args = {}) {
 				filename: '[name].css',
 				allChunks: true
 			}),
-			new webpack.ProvidePlugin({
-				$: 'anima-yocto'
-			}),
 			new VueLoaderPlugin()
 		]
 	};
