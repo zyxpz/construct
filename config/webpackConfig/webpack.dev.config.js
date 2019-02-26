@@ -38,6 +38,16 @@ module.exports = function (args) {
 
 	const config = webpackMerge(commonConfig, devConfig);
 
+
+	// entry
+	Object.getOwnPropertyNames((config.entry || {})).map(name => {
+		config.entry[name] = []
+		// 添加HMR文件
+			.concat("webpack/hot/dev-server")
+			.concat(`webpack-dev-server/client?http://localhost:${port}`)
+			.concat(config.entry[name]);
+	});
+
 	const handler = (percentage, message, ...args) => {
 		// e.g. Output each progress message directly to the console:
 		// console.info(percentage, message, ...args);
@@ -63,13 +73,17 @@ module.exports = function (args) {
 			additionalFormatters: [],
 			additionalTransformers: []
 		}),
-		new webpack.ProgressPlugin(handler)
+		new webpack.ProgressPlugin(handler),
+		// 添加HMR插件
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NamedModulesPlugin()
 	);
 
 	const compiler = webpack(config);
 
 	let serverOption = {
 		// contentBase: path.join(__dirname, 'dist'),
+		publicPath: config.output.publicPath,
 		historyApiFallback: false,
 		hot: true,
 		inline: true,
