@@ -29,7 +29,9 @@ module.exports = function babel() {
 			],
 			require.resolve('@babel/plugin-transform-react-jsx'),
 			require.resolve('babel-plugin-syntax-jsx'),
-			require.resolve('babel-plugin-transform-vue-jsx')
+			require.resolve('babel-plugin-transform-vue-jsx'),
+			require.resolve('dynamic-import-webpack'),
+			require.resolve('@babel/plugin-proposal-export-default-from'),
 		]
 	};
 

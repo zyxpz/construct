@@ -1,3 +1,9 @@
+# 1.1.3-beta9
+- 添加babel依赖
+
+# 1.1.3-beta8
+- react bug修复
+
 # 1.1.3-beta7
 - 添加mock数据系统
 - 分为dev,test,pre
