@@ -1,3 +1,8 @@
+# 1.1.4
+- 添加@babel/plugin-proposal-class-properties
+- 修改图片打包地址
+
+
 # 1.1.3-beta9
 - 添加babel依赖
 

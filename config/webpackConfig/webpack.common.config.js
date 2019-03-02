@@ -107,7 +107,8 @@ module.exports = function (args = {}) {
 				test: /\.(png|jpg|gif|eot|ttf|woff|woff2|svg)$/,
 				loader: require.resolve('url-loader'),
 				options: {
-					limit: 10000
+					limit: 10000,
+					name: 'images/[name].[ext]'
 				}
 			},
 			{
