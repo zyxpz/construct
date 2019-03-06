@@ -4,6 +4,8 @@ const APP_PATH = process.cwd();
 
 const path = require('path');
 
+const fs = require('fs-extra');
+
 const myip = require('my-ip')();
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -32,9 +34,13 @@ const postcssLoader = {
 };
 
 let userWebpack = {}; // 用户定义webpack
-if (configPath) {
-	userWebpack = require(configPath).webpack;
-	userSetConfig = require(configPath).config;
+if (fs.existsSync(configPath)) {
+	userWebpack = require("@babel/core").transformFileSync(configPath, {
+		plugins: [
+			require.resolve('@babel/plugin-proposal-export-default-from'),
+			require.resolve('@babel/plugin-proposal-export-namespace-from')
+		]
+	 }).code.webpack || {};
 }
 
 module.exports = function (args = {}) {

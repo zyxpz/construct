@@ -39,6 +39,21 @@ scripts: {
 
 ## 目录根路径 config/config.js
 
+## version > 1.1.5
+
+```vim
+export default {
+	babel: {
+
+	},
+	webpack: {
+
+	},
+	proxy: {
+	}
+}
+```
+
 ## proxy
 ```vim
 exports.proxy = {

@@ -8,8 +8,13 @@ const configPath = path.resolve(APP_PATH, 'config/config.js');
 
 let mockProxy = {};
 
-if (configPath) {
-	mockProxy = require(configPath).proxy || {};
+if (fs.existsSync(configPath)) {
+	mockProxy = require("@babel/core").transformFileSync(configPath, {
+		plugins: [
+			require.resolve('@babel/plugin-proposal-export-default-from'),
+			require.resolve('@babel/plugin-proposal-export-namespace-from')
+		]
+	 }).code.proxy || {};
 }
 
 const serverMockBefore = (mockData, app) => {

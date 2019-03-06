@@ -1,3 +1,7 @@
+# 1.1.5
+- 对用户设置config支持es6语法
+- npm包版本提醒
+
 # 1.1.4
 - 添加@babel/plugin-proposal-class-properties
 - 修改图片打包地址

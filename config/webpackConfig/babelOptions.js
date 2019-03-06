@@ -1,16 +1,12 @@
 const path = require('path');
 
+const fs = require('fs-extra');
+
 const APP_PATH = process.cwd();
 
 const configPath = path.resolve(APP_PATH, 'config/config.js');
 
 module.exports = function babel() {
-
-	let userBabel = {};
-	if (configPath) {
-		 userBabel = require(configPath).babel || {};
-	}
-
 	const defaultBabel = {
 		cacheDirectory: true,
 		presets: [
@@ -36,6 +32,17 @@ module.exports = function babel() {
 		]
 	};
 
+	let userBabel = {};
+	if (fs.existsSync(configPath)) {
+		 userBabel = require("@babel/core").transformFileSync(configPath, {
+			plugins: [
+				require.resolve('@babel/plugin-proposal-export-default-from'),
+				require.resolve('@babel/plugin-proposal-export-namespace-from')
+			]
+		 }).code.babel || {};
+	}
+	
+
 	for (const key in defaultBabel) {
 		if (Object.hasOwnProperty.call(defaultBabel, key)) {
 			let defaultValue = defaultBabel[key];
@@ -45,7 +52,7 @@ module.exports = function babel() {
 						const userValue = userBabel[uKey];
 						if (uKey === key && Array.isArray(defaultValue) && Array.isArray(userValue)) {
 							defaultValue.push(...userValue);
-						} else if (!Array.isArray(defaultValue) && !Array.isArray(userValue))  {
+						} else if (!Array.isArray(defaultValue) && !Array.isArray(userValue)) {
 							defaultValue = Object.assign(defaultValue, userValue);
 						}
 					}
