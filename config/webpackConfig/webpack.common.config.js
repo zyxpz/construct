@@ -20,8 +20,6 @@ const {
 	entry
 } = require(path.resolve(APP_PATH, 'package.json'));
 
-const configPath = path.resolve(APP_PATH, 'config/config.js');
-
 const babelOptions = require('./babelOptions')();
 
 const postcssLoader = {
@@ -33,15 +31,7 @@ const postcssLoader = {
 	}
 };
 
-let userWebpack = {}; // 用户定义webpack
-if (fs.existsSync(configPath)) {
-	userWebpack = require("@babel/core").transformFileSync(configPath, {
-		plugins: [
-			require.resolve('@babel/plugin-proposal-export-default-from'),
-			require.resolve('@babel/plugin-proposal-export-namespace-from')
-		]
-	 }).code.webpack || {};
-}
+let userWebpack = require(path.join(__dirname, '../', 'userSetConfig', 'config', 'config.js')).webpack || {};
 
 module.exports = function (args = {}) {
 	const {
@@ -85,28 +75,36 @@ module.exports = function (args = {}) {
 			},
 			{
 				test: /\.vue?$/,
-				use: [
-					{	loader: require.resolve('vue-loader'),  }
-				],
+				use: [{
+					loader: require.resolve('vue-loader'),
+				}],
 				exclude: /node_modules/,
 			},
 			{
 				test: /\.css$/,
-				use: [
-					{ loader: require.resolve('vue-style-loader') },
-					MiniCssExtractPlugin.loader,
-					{ loader: require.resolve('css-loader') },
-					postcssLoader,
+				use: [{
+					loader: require.resolve('vue-style-loader')
+				},
+				MiniCssExtractPlugin.loader,
+				{
+					loader: require.resolve('css-loader')
+				},
+				postcssLoader,
 				]
 			},
 			{
 				test: /\.less$/,
-				use: [
-					{ loader: require.resolve('vue-style-loader') },
-					MiniCssExtractPlugin.loader,
-					{ loader: require.resolve('css-loader') },
-					postcssLoader,
-					{ loader: require.resolve('less-loader') }
+				use: [{
+					loader: require.resolve('vue-style-loader')
+				},
+				MiniCssExtractPlugin.loader,
+				{
+					loader: require.resolve('css-loader')
+				},
+				postcssLoader,
+				{
+					loader: require.resolve('less-loader')
+				}
 				],
 			},
 			{

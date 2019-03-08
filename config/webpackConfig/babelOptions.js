@@ -1,10 +1,6 @@
 const path = require('path');
 
-const fs = require('fs-extra');
-
-const APP_PATH = process.cwd();
-
-const configPath = path.resolve(APP_PATH, 'config/config.js');
+const userConfig = require('../util/userSetConfig');
 
 module.exports = function babel() {
 	const defaultBabel = {
@@ -32,16 +28,9 @@ module.exports = function babel() {
 		]
 	};
 
-	let userBabel = {};
-	if (fs.existsSync(configPath)) {
-		 userBabel = require("@babel/core").transformFileSync(configPath, {
-			plugins: [
-				require.resolve('@babel/plugin-proposal-export-default-from'),
-				require.resolve('@babel/plugin-proposal-export-namespace-from')
-			]
-		 }).code.babel || {};
-	}
-	
+	userConfig();
+
+	const userBabel = require(path.join(__dirname, '../', 'userSetConfig', 'config', 'config.js')).babel;
 
 	for (const key in defaultBabel) {
 		if (Object.hasOwnProperty.call(defaultBabel, key)) {

@@ -4,18 +4,9 @@ const fs = require('fs-extra');
 
 const APP_PATH = process.cwd();
 
-const configPath = path.resolve(APP_PATH, 'config/config.js');
+const chalk = require('chalk');
 
-let mockProxy = {};
-
-if (fs.existsSync(configPath)) {
-	mockProxy = require("@babel/core").transformFileSync(configPath, {
-		plugins: [
-			require.resolve('@babel/plugin-proposal-export-default-from'),
-			require.resolve('@babel/plugin-proposal-export-namespace-from')
-		]
-	 }).code.proxy || {};
-}
+let mockProxy = require(path.join(__dirname, '../', 'userSetConfig', 'config', 'config.js')).proxy;
 
 const serverMockBefore = (mockData, app) => {
 	let carrentArr = [];
@@ -27,7 +18,7 @@ const serverMockBefore = (mockData, app) => {
 			});
 		}
 	}
-	
+
 	let getArr = [];
 	let postArr = [];
 	let deleteArr = [];
@@ -58,11 +49,13 @@ const serverMockBefore = (mockData, app) => {
 			putArr.push(item);
 		}
 	});
-  
+
 
 	getArr.forEach(item => {
 		if (typeof item.content !== 'function') {
-			app.get(`${item.path}`, (req, res) => { res.json(item.content); });
+			app.get(`${item.path}`, (req, res) => {
+				res.json(item.content);
+			});
 		} else {
 			app.get(`${item.path}`, item.content);
 		}
@@ -70,7 +63,9 @@ const serverMockBefore = (mockData, app) => {
 
 	postArr.forEach(item => {
 		if (typeof item.content !== 'function') {
-			app.post(`${item.path}`, (req, res) => { res.json(item.content); });
+			app.post(`${item.path}`, (req, res) => {
+				res.json(item.content);
+			});
 		} else {
 			app.post(`${item.path}`, item.content);
 		}
@@ -78,7 +73,9 @@ const serverMockBefore = (mockData, app) => {
 
 	deleteArr.forEach(item => {
 		if (typeof item.content !== 'function') {
-			app.delete(`${item.path}`, (req, res) => { res.json(item.content); });
+			app.delete(`${item.path}`, (req, res) => {
+				res.json(item.content);
+			});
 		} else {
 			app.delete(`${item.path}`, item.content);
 		}
@@ -86,7 +83,9 @@ const serverMockBefore = (mockData, app) => {
 
 	putArr.forEach(item => {
 		if (typeof item.content !== 'function') {
-			app.put(`${item.path}`, (req, res) => { res.json(item.content); });
+			app.put(`${item.path}`, (req, res) => {
+				res.json(item.content);
+			});
 		} else {
 			app.put(`${item.path}`, item.content);
 		}
@@ -104,24 +103,37 @@ module.exports = function (arges = {}) {
 	switch (milieu) {
 		case 'dev':
 			const directory = path.join(APP_PATH, 'mock');
-      
-			if (directory) {
+
+			if (fs.existsSync(directory)) {
 				fs.readdirSync(directory, {
 					encoding: 'utf-8'
 				}).forEach(file => {
-				// 文件路径
+					// 文件路径
 					const filePath = path.join(directory, file);
-    
+
 					// 文件状态
 					const fileStat = fs.statSync(filePath);
-    
+
 					if (fileStat.isFile()) {
-					// 文件后缀
+						// 文件后缀
 						const fileExtName = path.extname(filePath);
 						if (fileExtName === '.js') {
 							const fileBasename = path.basename(filePath);
 							if (fileBasename.indexOf('.mock.js') > -1) {
-								const mockData = require(filePath);
+								const useMockData = require("@babel/core").transformFileSync(filePath, {
+									presets: [
+										[require.resolve('@babel/preset-env'), { "modules": "commonjs" }],
+									],
+									plugins: [
+										require.resolve('babel-plugin-add-module-exports')
+									]
+								}).code;
+
+								fs.outputFileSync(path.join(__dirname, '../', 'userSetConfig', 'mock', fileBasename), useMockData);
+
+								const mockData = require(path.join(__dirname, '../', 'userSetConfig', 'mock', fileBasename));
+
+								console.log(mockData, 'mockdata');
 								serverMockBefore(mockData, app);
 							} else {
 								console.log('请添加*.mock.js文件');
@@ -130,7 +142,10 @@ module.exports = function (arges = {}) {
 					}
 				});
 			} else {
-				console.log('请在添加根目录添加mock文件夹或不需要mock数据在启动命令是不要带上mock');
+				console.log('');
+				console.log('');
+				console.log(chalk.yellow('⚠️  请在添加根目录添加mock文件夹或不需要mock数据在启动命令是不要带上mock'));
+				console.log('');
 			}
 			break;
 		case 'test':
@@ -160,7 +175,7 @@ module.exports = function (arges = {}) {
 					};
 				}
 			}
-			return proxy; 
+			return proxy;
 		default:
 			break;
 	}
