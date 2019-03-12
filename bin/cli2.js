@@ -50,7 +50,7 @@ const start = () => {
 
 
 	program.parse(process.argv); // 开始解析用户输入的命令
-}
+};
 
 let appPackage = {};
 try {
@@ -79,28 +79,28 @@ if (midoVersionInApp && midoVersionInApp.indexOf('^') === -1) {
 }
 const str = chalk.red(
 	`${
-    lockedMido ? 'npm install mido-construct@latest --save && ' : ''
-  }npm update`,
+		lockedMido ? 'npm install mido-construct@latest --save && ' : ''
+	}npm update`,
 );
 
 const formatter = (reset) => {
 	return chalk.yellow(
 		`检测到新版本: ${chalk.magenta(reset.current)}(本地版本) → ${chalk.magenta(
-      reset.version,
-    )}(最新版本)\n   你可以执行 ${str} 来更新版本。`,
+			reset.version,
+		)}(最新版本)\n   你可以执行 ${str} 来更新版本。`,
 	);
-}
+};
 
-npmUpdate({
-		package: pkg,
-		abort: false, // 当 repository 里面的版本和本地版本不一样时，不会终止
-		interval: '1m', // 提示的间隔
-		tag: 'latest', // 和 repository 的哪个 tag 版本做比较
-		formatter, // 提示信息
-	})
-	.then(() => {
-		start()
-	})
-	.catch(() => {
-		start()
-	})
+// npmUpdate({
+// 		package: pkg,
+// 		abort: false, // 当 repository 里面的版本和本地版本不一样时，不会终止
+// 		interval: '1m', // 提示的间隔
+// 		tag: 'latest', // 和 repository 的哪个 tag 版本做比较
+// 		formatter, // 提示信息
+// 	})
+// 	.then(() => {
+// 	start()
+// })
+// .catch(() => {
+start();
+// })

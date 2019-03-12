@@ -40,13 +40,13 @@ module.exports = function (args) {
 
 
 	// entry
-	// Object.getOwnPropertyNames((config.entry || {})).map(name => {
-	// 	config.entry[name] = []
-	// 	// 添加HMR文件
-	// 		.concat("webpack/hot/dev-server")
-	// 		.concat(`webpack-dev-server/client?http://localhost:${port}`)
-	// 		.concat(config.entry[name]);
-	// });
+	Object.getOwnPropertyNames((config.entry || {})).map(name => {
+		config.entry[name] = []
+		// 添加HMR文件
+			.concat("webpack/hot/dev-server")
+			.concat(`webpack-dev-server/client?http://localhost:${port}`)
+			.concat(config.entry[name]);
+	});
 
 	const handler = (percentage, message, ...args) => {
 		// e.g. Output each progress message directly to the console:

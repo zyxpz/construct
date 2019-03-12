@@ -133,7 +133,6 @@ module.exports = function (arges = {}) {
 
 								const mockData = require(path.join(__dirname, '../', 'userSetConfig', 'mock', fileBasename));
 
-								console.log(mockData, 'mockdata');
 								serverMockBefore(mockData, app);
 							} else {
 								console.log('请添加*.mock.js文件');
