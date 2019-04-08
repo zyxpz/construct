@@ -1,3 +1,8 @@
+
+# 1.1.8
+- @babel/preset-env 固定该版本为7.3.1 目前高版本对export default 有影响
+- 新增@babel/plugin-proposal-decorators 插件
+
 # 1.1.6
 - bugfix
 

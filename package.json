@@ -1,6 +1,6 @@
 {
   "name": "mido-construct",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "webpack4前端框架快速构建",
   "main": "index.js",
   "bin": {
@@ -25,12 +25,13 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
     "@babel/plugin-transform-modules-commonjs": "^7.2.0",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@babel/plugin-transform-runtime": "^7.2.0",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-env": "7.3.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.3.1",
     "atpl-loader": "^0.2.0",
