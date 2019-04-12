@@ -35,7 +35,8 @@ module.exports = function babel() {
 				{
 					'loose': true
 				}
-			]
+			],
+			require.resolve('babel-plugin-add-module-exports')
 		]
 	};
 

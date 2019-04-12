@@ -1,3 +1,7 @@
+# 1.1.9
+- 新增midoReact
+- 新增midoVue
+- 新增midoWebpack
 
 # 1.1.8
 - @babel/preset-env 固定该版本为7.3.1 目前高版本对export default 有影响
