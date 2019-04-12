@@ -45,9 +45,9 @@ module.exports = function (args = {}) {
 			alias: {
 				vue$: 'vue/dist/vue.esm.js',
 				node_modules: path.resolve(APP_PATH, 'node_modules'),
-				midoReact: '../../lib/react/react.js',
-				midoVue: '../../lib/vue/vue.js',
-				midoWebpack: '../../lib/webpack/webpack.js'
+				midoReact: path.join(__dirname, '../../lib/react/react.js'),
+				midoVue: path.join(__dirname, '../../lib/vue/vue.js'),
+				midoWebpack: path.join(__dirname, '../../lib/webpack/webpack.js')
 			}
 		},
 		entry,

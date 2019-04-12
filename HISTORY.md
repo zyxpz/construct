@@ -1,3 +1,6 @@
+# 1.2.0
+- bugfix
+
 # 1.1.9
 - 新增midoReact
 - 新增midoVue
