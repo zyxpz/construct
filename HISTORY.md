@@ -1,3 +1,9 @@
+# 1.2.2
+- config配置webpack 可为函数
+
+# 1.2.1
+- lodash upDate
+
 # 1.2.0
 - bugfix
 

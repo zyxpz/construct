@@ -198,6 +198,6 @@ module.exports = function (args = {}) {
 	return {
 		APP_PATH,
 		myip,
-		commonConfig: webpackMerge(userWebpack, frameWebpack)
+		commonConfig: webpackMerge(typeof userWebpack === 'function' ? userWebpack(frameWebpack) : userWebpack, frameWebpack)
 	};
 };
