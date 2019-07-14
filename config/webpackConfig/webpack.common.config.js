@@ -106,7 +106,10 @@ module.exports = function (args = {}) {
 				},
 				postcssLoader,
 				{
-					loader: require.resolve('less-loader')
+					loader: require.resolve('less-loader'),
+					options: {
+						javascriptEnabled: true
+					}
 				}
 				],
 			},
