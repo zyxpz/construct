@@ -88,7 +88,12 @@ module.exports = function (args = {}) {
 				use: [{
 					loader: require.resolve('vue-style-loader')
 				},
-				MiniCssExtractPlugin.loader,
+				{
+					loader: MiniCssExtractPlugin.loader,
+					options: {
+						hmr: process.env.NODE_ENV === 'development'
+					}
+				},
 				{
 					loader: require.resolve('css-loader')
 				},
@@ -100,7 +105,12 @@ module.exports = function (args = {}) {
 				use: [{
 					loader: require.resolve('vue-style-loader')
 				},
-				MiniCssExtractPlugin.loader,
+				{
+					loader: MiniCssExtractPlugin.loader,
+					options: {
+						hmr: process.env.NODE_ENV === 'development'
+					}
+				},
 				{
 					loader: require.resolve('css-loader')
 				},

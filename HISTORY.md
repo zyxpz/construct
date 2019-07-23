@@ -1,3 +1,11 @@
+# 1.2.3
+- {
+    loader: MiniCssExtractPlugin.loader,
+    options: {
+      hmr: process.env.NODE_ENV === 'development'
+    }
+  }
+
 # 1.2.2
 - config配置webpack 可为函数
 
