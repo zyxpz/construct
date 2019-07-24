@@ -6,7 +6,7 @@ module.exports = function babel() {
 	const defaultBabel = {
 		cacheDirectory: true,
 		presets: [
-			require.resolve('@babel/preset-env'),
+			[require.resolve('@babel/preset-env'), { modules: false }],
 			require.resolve('@babel/preset-react')
 		],
 		plugins: [
@@ -36,7 +36,8 @@ module.exports = function babel() {
 					'loose': true
 				}
 			],
-			require.resolve('babel-plugin-add-module-exports')
+			require.resolve('babel-plugin-add-module-exports'),
+			require.resolve('@babel/plugin-transform-modules-commonjs')
 		]
 	};
 

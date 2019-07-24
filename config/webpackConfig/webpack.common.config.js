@@ -60,7 +60,7 @@ module.exports = function (args = {}) {
 		module: {
 			rules: [{
 				test: /\.(js|jsx)?$/,
-				exclude: /node_modules/,
+				// exclude: /node_modules/,
 				use: [{
 					loader: require.resolve('babel-loader'),
 					options: babelOptions
@@ -68,7 +68,7 @@ module.exports = function (args = {}) {
 			},
 			{
 				test: /\.(ts|tsx)?$/,
-				exclude: /node_modules/,
+				// exclude: /node_modules/,
 				use: [{
 					loader: require.resolve('babel-loader'),
 					options: babelOptions
@@ -81,7 +81,7 @@ module.exports = function (args = {}) {
 				use: [{
 					loader: require.resolve('vue-loader'),
 				}],
-				exclude: /node_modules/,
+				// exclude: /node_modules/,
 			},
 			{
 				test: /\.css$/,
