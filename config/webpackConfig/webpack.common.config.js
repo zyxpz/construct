@@ -41,7 +41,7 @@ module.exports = function (args = {}) {
 		resolve: {
 			mainFiles: ['index'],
 			modules: [path.resolve(APP_PATH, 'src'), 'node_modules'],
-			extensions: ['.js', '.jsx', '.vue', 'ts', '.json', '.less', '.css'],
+			extensions: ['.js', '.jsx', '.vue', '.ts', '.tsx', '.json', '.less', '.css'],
 			alias: {
 				vue$: 'vue/dist/vue.esm.js',
 				node_modules: path.resolve(APP_PATH, 'node_modules'),

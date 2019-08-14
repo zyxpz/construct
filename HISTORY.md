@@ -1,3 +1,6 @@
+# # 1.2.4
+- webpack extensions ['.ts', '.tsx']
+
 # 1.2.3
 - {
     loader: MiniCssExtractPlugin.loader,
