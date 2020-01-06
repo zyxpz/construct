@@ -1,4 +1,7 @@
-# # 1.2.4
+# 1.2.5
+- react vue webpack export
+
+# 1.2.4
 - webpack extensions ['.ts', '.tsx']
 
 # 1.2.3
