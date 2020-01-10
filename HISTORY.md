@@ -1,3 +1,6 @@
+# 1.2.6
+- fix webpack file
+
 # 1.2.5
 - react vue webpack export
 

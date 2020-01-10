@@ -1,4 +1,4 @@
-const webpack = require('../../lib/webpack/webpack.js');
+const webpack = require('webpack');
 
 const APP_PATH = process.cwd();
 

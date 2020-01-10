@@ -1,4 +1,4 @@
-const webpack = require('../../lib/webpack/webpack');
+const webpack = require('webpack');
 
 const webpackMerge = require('webpack-merge');
 
